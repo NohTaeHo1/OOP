@@ -16,7 +16,7 @@ public class UserView {
             System.out.println("[메뉴]\n 0-종료\n " +
                     "1-회원가입\n " +
                     "2-로그인\n " +
-                    "3-ID검색\n" +
+                    "3-ID검색\n " +
                     "4-비번변경\n " +
                     "5-탈퇴\n " +
                     "6-회원목록\n " +
@@ -37,13 +37,17 @@ public class UserView {
                     break;
                 case "3":
                     System.out.println("=== ID검색 ===");
-                    uc.idSearch(sc);
+                    System.out.println(uc.idSearch(sc));
 
                     break;
                 case "6":
                     System.out.println("=== 회원목록 ===");
                     Map<String, UserDTO> users = uc.getUserMap();
                     System.out.println("회원목록 : " + users);
+                    break;
+                case "8":
+                    System.out.println("=== 직업검색 ===");
+                    System.out.println("검색완료\n"+uc.jobSearch(sc));
                     break;
                 case "9":
                     System.out.println("=== 회원수 ===");

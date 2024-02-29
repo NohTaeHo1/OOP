@@ -17,4 +17,6 @@ public interface UserService {
     String login(UserDTO build);
 
     String idSearch(UserDTO build);
+
+    UserDTO jobSearch(UserDTO build);
 }

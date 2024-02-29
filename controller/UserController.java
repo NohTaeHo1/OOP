@@ -60,4 +60,11 @@ public class UserController {
                 .username(sc.next())
                 .build());
     }
+
+    public UserDTO jobSearch(Scanner sc) {
+        return us.jobSearch(new UserBuilder()
+                .job(sc.next())
+                .build())
+                ;
+    }
 }

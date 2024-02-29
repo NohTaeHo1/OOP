@@ -3,6 +3,7 @@ package builder;
 import model.UserDTO;
 
 public class UserBuilder {
+    //private String id;
     private String username;
     private String passwordConfirm;
     private String password;
@@ -15,6 +16,7 @@ public class UserBuilder {
 
     private double height;
     private double weight;
+
 
     public UserBuilder username(String username){
         this.username = username;

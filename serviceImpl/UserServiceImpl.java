@@ -26,6 +26,20 @@ public class UserServiceImpl implements UserService {
     Map<String, UserDTO> users;
 
     @Override
+    public UserDTO jobSearch(UserDTO build) {
+        String findUserName ="";
+        for(String key : users.keySet()){
+            UserDTO information = users.get(key);
+            if(build.getJob().equals(information.getJob())){
+                findUserName = key;
+            }
+        }
+
+        return users.get(findUserName);
+
+    }
+
+    @Override
     public String addUsers() {
         Map<String, UserDTO> map = new HashMap<>();
         UtilService util = UtilServiceImpl.getInstance();
@@ -71,10 +85,10 @@ public class UserServiceImpl implements UserService {
 
         if(u == null) {
             System.out.println("없음");
-        } else if(u.getPassword() != pw) {
-            System.out.println("틀림");
-        } else {
+        } else if(u.getPassword().equals(pw)) {
             System.out.println("로그인 성공");
+        } else {
+            System.out.println("틀림");
         }
 
 /*        if (id.equals(u.getUsername())) {
@@ -94,12 +108,12 @@ public class UserServiceImpl implements UserService {
     public String idSearch(UserDTO ud) {
         UserDTO userDTO = users.get(ud.getUsername());
         if(userDTO == null ){
-            System.out.println("해당 ID가 존재하지 않습니다.");
+            return "해당 ID가 존재하지 않습니다.";
         }
         else{
             System.out.println(userDTO);
+            return "아이디 검색 성공";
         }
-        return null;
     }
     /*
     UserDTO userDTO = users.get("입력아이디");
