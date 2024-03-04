@@ -1,7 +1,7 @@
 package view;
 
 import controller.UserController;
-import model.UserDTO;
+import model.User;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -42,7 +42,7 @@ public class UserView {
                     break;
                 case "6":
                     System.out.println("=== 회원목록 ===");
-                    Map<String, UserDTO> users = uc.getUserMap();
+                    Map<String, User> users = uc.getUserMap();
                     System.out.println("회원목록 : " + users);
                     break;
                 case "8":

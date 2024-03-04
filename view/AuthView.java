@@ -1,8 +1,7 @@
 package view;
 
 import controller.AuthController;
-import controller.UserController;
-import model.UserDTO;
+import model.User;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -16,7 +15,7 @@ public class AuthView {
             System.out.println("[메뉴]\n 0-종료\n " +
                     "1-회원가입\n " +
                     "2-로그인\n " +
-                    "3-ID검색\n" +
+                    "3-ID검색\n " +
                     "4-비번변경\n " +
                     "5-탈퇴\n " +
                     "6-회원목록\n " +
@@ -36,7 +35,7 @@ public class AuthView {
                     break;
                 case "3":
                     System.out.println("=== ID검색 ===");
-                    Map<String, UserDTO> users = ctrl.getUserMap();
+                    Map<String, User> users = ctrl.getUserMap();
                     users.forEach((k,v)->
                             System.out.print("{"+k+","+v+"},"));
                     ctrl.findUser(sc.next());

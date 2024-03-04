@@ -1,16 +1,12 @@
 package serviceImpl;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import repository.UserRepository;
-import service.AuthService;
 import service.UserService;
 import service.UtilService;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class UserServiceImpl implements UserService {
     private static UserService instance = new UserServiceImpl();
@@ -23,13 +19,13 @@ public class UserServiceImpl implements UserService {
     }
     UserRepository a;
 
-    Map<String, UserDTO> users;
+    Map<String, User> users;
 
     @Override
-    public UserDTO jobSearch(UserDTO build) {
+    public User jobSearch(User build) {
         String findUserName ="";
         for(String key : users.keySet()){
-            UserDTO information = users.get(key);
+            User information = users.get(key);
             if(build.getJob().equals(information.getJob())){
                 findUserName = key;
             }
@@ -41,13 +37,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String addUsers() {
-        Map<String, UserDTO> map = new HashMap<>();
+        Map<String, User> map = new HashMap<>();
         UtilService util = UtilServiceImpl.getInstance();
 
         for (int i = 0; i < 5; i++) {
             String username = util.createRandomUsername();
             map.put(username,
-                    new UserBuilder()
+                    User.builder()
                             .username(username)
                             .password("1")
                             .passwordConfirm("1")
@@ -64,24 +60,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String join(UserDTO user) {
+    public String join(User user) {
         users.put(user.getUsername(), user);
         return "회원가입 성공";
     }
 
     @Override
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         System.out.println("전체 목록 출력");
         users.forEach((k, v) -> System.out.print("{" + k + "," + v));
         return users;
     }
 
     @Override
-    public String login(UserDTO userDTO) {
+    public String login(User userDTO) {
         String id = userDTO.getUsername();
         String pw = userDTO.getPassword();
 
-        UserDTO u = users.get(id);
+        User u = users.get(id);
 
         if(u == null) {
             System.out.println("없음");
@@ -105,8 +101,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String idSearch(UserDTO ud) {
-        UserDTO userDTO = users.get(ud.getUsername());
+    public String idSearch(User ud) {
+        User userDTO = users.get(ud.getUsername());
         if(userDTO == null ){
             return "해당 ID가 존재하지 않습니다.";
         }

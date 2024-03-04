@@ -1,11 +1,9 @@
 package controller;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.AuthService;
 import serviceImpl.AuthServiceImpl;
 
-import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -24,7 +22,7 @@ public class AuthController {
                 "주소, 직업을 입력해주세요");
 
 
-        return auth.join(new UserBuilder()
+        return auth.join(User.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .passwordConfirm(sc.next())
@@ -36,7 +34,7 @@ public class AuthController {
     }
 
     public String login(Scanner sc) {
-        return auth.login(new UserBuilder()
+        return auth.login(User.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .build());
@@ -50,7 +48,7 @@ public class AuthController {
         auth.findUser(username);
     }
 
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         return auth.getUserMap();
     }
 

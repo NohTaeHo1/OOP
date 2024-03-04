@@ -1,8 +1,7 @@
 package controller;
 
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.UserService;
 import serviceImpl.UserServiceImpl;
 
@@ -32,7 +31,7 @@ public class UserController {
                 "주소, 직업을 입력해주세요");
 
 
-        return us.join(new UserBuilder()
+        return us.join(User.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .passwordConfirm(sc.next())
@@ -43,28 +42,26 @@ public class UserController {
                 ;
     }
 
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         return us.getUserMap();
-
     }
 
     public String login(Scanner sc) {
-        return us.login(new UserBuilder()
+        return us.login(User.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .build());
     }
 
     public String idSearch(Scanner sc) {
-        return us.idSearch(new UserBuilder()
+        return us.idSearch(User.builder()
                 .username(sc.next())
                 .build());
     }
 
-    public UserDTO jobSearch(Scanner sc) {
-        return us.jobSearch(new UserBuilder()
+    public User jobSearch(Scanner sc) {
+        return us.jobSearch(User.builder()
                 .job(sc.next())
-                .build())
-                ;
+                .build());
     }
 }

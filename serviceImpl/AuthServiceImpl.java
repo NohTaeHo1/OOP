@@ -1,34 +1,35 @@
 package serviceImpl;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.AuthService;
 import service.UtilService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();
-    Map<String, UserDTO> users;
+    Map<String, User> users;
+    ArrayList<User> userslist;
 
 
     private AuthServiceImpl(){
         this.users = new HashMap<>();
+        this.userslist = new ArrayList<>();
     }
     public static AuthService getInstance(){return instance;}
 
+
+
+
     @Override
-    public String join(UserDTO user) {
+    public String join(User user) {
         users.put(user.getUsername(), user);
         return "회원가입 성공";
 
     }
 
     @Override
-    public String login(UserDTO build) {
+    public String login(User build) {
 
 
         return null;
@@ -36,13 +37,13 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String addUsers() {
-        Map<String, UserDTO> map = new HashMap<>();
+        Map<String, User> map = new HashMap<>();
         UtilService util = UtilServiceImpl.getInstance();
 
         for(int i=0; i<5; i++){
             String username = util.createRandomUsername();
             map.put(username,
-                    new UserBuilder()
+                    User.builder()
                             .username(username)
                             .password("1")
                             .passwordConfirm("1")
@@ -55,13 +56,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserDTO findUser(String username) {
-        UserDTO user = new UserBuilder().build();
+    public User findUser(String username) {
+        User user = User.builder().build();
 
         return user;
     }
     @Override
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         System.out.println("전체 목록 출력");
         users.forEach((k,v)-> System.out.print("{"+k+","+v+"},"));
         return users;

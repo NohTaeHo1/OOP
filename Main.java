@@ -20,6 +20,6 @@ public class Main {
                 case "6": AccountView.main(sc); break;
             }
         }
-
     }
 }
+
