@@ -17,22 +17,64 @@ public class AuthServiceImpl implements AuthService {
         this.userslist = new ArrayList<>();
     }
     public static AuthService getInstance(){return instance;}
-
-
-
-
     @Override
     public String join(User user) {
         users.put(user.getUsername(), user);
         return "회원가입 성공";
-
     }
 
     @Override
-    public String login(User build) {
+    public String login(User user) {
+        return users.getOrDefault(user.getUsername(), User.builder().password("").build())
+                .getPassword()
+                .equals(user.getPassword()) ?
+                "로그인 성공" : "로그인 실패";
+    }
 
+    @Override
+    public User findUserById(String username) {
+        return users.get(username)
+                ;
+    }
+
+    @Override
+    public String updatePassword(User user) {
+      //  users.get(user.getUsername()).setPassword(user.getPassword());
+
+        return "비번 변경 성공";
+    }
+
+    @Override
+    public String deleteUser(String username) {
+        users.remove(username);
+        return "회원삭제";
+    }
+
+    @Override
+    public List<?> getUserList() {
+        return  new ArrayList<>(users.values());
+    }
+
+    @Override
+    public List<?> findUsersByName(String name) {
 
         return null;
+    }
+
+    @Override
+    public List<?> findUsersByJob(String job) {
+
+        return null;
+    }
+
+    @Override
+    public String countUsers() {
+        return users.size()+"";
+    }
+
+    @Override
+    public Map<String, ?> getUserMap() {
+        return users;
     }
 
     @Override
@@ -46,30 +88,12 @@ public class AuthServiceImpl implements AuthService {
                     User.builder()
                             .username(username)
                             .password("1")
-                            .passwordConfirm("1")
                             .name(util.createRandomName())
                             .build());
         }
         users = map;
-        return "";
+        return users.size()+"개 더미값 추가";
 
     }
 
-    @Override
-    public User findUser(String username) {
-        User user = User.builder().build();
-
-        return user;
-    }
-    @Override
-    public Map<String, User> getUserMap() {
-        System.out.println("전체 목록 출력");
-        users.forEach((k,v)-> System.out.print("{"+k+","+v+"},"));
-        return users;
-    }
-
-    @Override
-    public String count() {
-        return users.size()+""; //뒤에 +"" 하면 스트링으로 바뀜
-    }
 }
