@@ -3,6 +3,7 @@ package strategy;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 enum Grade {
     A(9, () -> "A등급"),
@@ -27,7 +28,6 @@ enum Grade {
                 .findFirst().orElseThrow(() -> new IllegalArgumentException("올바른 값이 아닙니다."));
     }
 }
-
 public class GradeMain {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -35,6 +35,3 @@ public class GradeMain {
         System.out.println(Grade.getGrade(sc.nextInt()));
     }
 }
-
-
-
